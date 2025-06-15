@@ -17,6 +17,16 @@ export class UserService {
     const url = `http://localhost:8082/api/users/auth/signup`
     return this.http.post<UserModel>(url,user,this.httpOptions)
   }
+  signIn(username:string,password:string): Observable<string>{
+    const url = `http://localhost:8082/api/users/auth/signin`
+    const body = {
+      username: username,
+      password: password
+    }
+    return this.http.post(url,body,{
+      responseType:'text'
+    })
+  }
   getAllUsers(){
     const url =`http://localhost:8082/api/users/auth`
     return this.http.get<Array<UserModel>>(url)
