@@ -5,7 +5,7 @@ export const routes: Routes = [{
   path:'',
   pathMatch:'full',
   loadComponent:()=>{
-    return import('./login/login').then((m)=>m.Login)
+    return import('./register/register').then((m)=>m.Register)
   }
 }
 ];
