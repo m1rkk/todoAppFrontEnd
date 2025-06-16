@@ -1,9 +1,50 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {TodoModel} from '../models/todoModel';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
+  http = inject(HttpClient)
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    })
+  };
+
+  getAllTasks(){
+    const url = `http://localhost:8082/api/secured/tasks`
+    return this.http.get<Array<TodoModel>>(url);
+  }
+  getTask(taskId:string): Observable<TodoModel>{
+    const url = `http://localhost:8082/api/secured/task/`+taskId
+    return this.http.get<TodoModel>(url)
+  }
+  deleteTask(taskId:string){
+    const url = `http://localhost:8082/api/secured/task/`+taskId
+    return this.http.delete(url)
+  }
+
+  addTaskToUser(taskId:string){
+    const url = `http://localhost:8082/api/secured/add/`+taskId
+    return this.http.post(url,this.httpOptions)
+  }
+  updateTask(taskId:string, title:string, description:string,completed:boolean){
+    const url = `http://localhost:8082/api/secured/update/`+taskId+`?
+    title=`+title+`&
+    description=`+description+`&
+    completed=`+completed+`
+    Content-Type: application/x-www-form-urlencoded`
+    return this.http.put(url,this.httpOptions)
+  }
+  createTask(todo: TodoModel){
+    const url = `http://localhost:8082/api/secured/saveNewTask`
+    return this.http.post(url,todo,this.httpOptions)
+  }
+
 
   constructor() { }
 }
