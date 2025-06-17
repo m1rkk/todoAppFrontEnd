@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class TodoService {
   http = inject(HttpClient)
-  httpOptions = {
+  httpOptions  = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -17,15 +17,15 @@ export class TodoService {
 
   getAllTasks(){
     const url = `http://localhost:8082/api/secured/tasks`
-    return this.http.get<Array<TodoModel>>(url);
+    return this.http.get<Array<TodoModel>>(url,this.httpOptions);
   }
   getTask(taskId:string): Observable<TodoModel>{
     const url = `http://localhost:8082/api/secured/task/`+taskId
-    return this.http.get<TodoModel>(url)
+    return this.http.get<TodoModel>(url,this.httpOptions)
   }
   deleteTask(taskId:string){
     const url = `http://localhost:8082/api/secured/task/`+taskId
-    return this.http.delete(url)
+    return this.http.delete(url,this.httpOptions)
   }
 
   addTaskToUser(taskId:string){
