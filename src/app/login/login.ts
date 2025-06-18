@@ -1,24 +1,33 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {UserService} from '../services/user-service';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    FormsModule
+  ],
   templateUrl: './login.html',
   standalone: true,
   styleUrl: './login.scss'
 })
-export class Login implements OnInit{
-  username = 'mark'
-  password = 'io2jr3oiom1kmockw3'
+export class Login{
   userService = inject(UserService)
-  ngOnInit(): void {
-    this.userService.signIn(this.username,this.password)
-      .pipe()
-      .subscribe(response =>{
-      localStorage.setItem('token',response)
-    })
-
+  usernameValue = ''
+  passwordValue = ''
+  logInUser(){
+    this.userService.signIn(this.usernameValue,this.passwordValue)
+      .subscribe({next: (response)=>{
+          localStorage.setItem('token',response)
+          alert("Success")
+        },error:(err)=>{
+        alert(err.message);
+        }
+      })
   }
+
 
 }
