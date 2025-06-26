@@ -32,7 +32,7 @@ export class Register{
       username: this.usernameValue,
       email: this.emailValue,
       password: this.passwordValue,
-      todos: []
+      tasks: Array<TodoModel>()
     }
     this.userService.addNewUser(user)
         .subscribe({next: (user)=>{
