@@ -1,0 +1,22 @@
+#todos-container{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 2%;
+  box-shadow: 0 4px 31px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  overflow-y: scroll;
+}
+#todos-container::-webkit-scrollbar{
+  background: transparent;
+}
+#todos-container::-webkit-scrollbar-track{
+  background: transparent;
+}
+#todos-container::-webkit-scrollbar-thumb{
+  background: #03f;
+}
+

@@ -29,3 +29,14 @@ app-login{
   width: 100%;
   height: 100%;
 }
+app-todos{
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+app-todo-item{
+  margin-top: 5%;
+}
