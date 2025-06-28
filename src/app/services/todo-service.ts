@@ -14,6 +14,12 @@ export class TodoService {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     })
   };
+  httpOptions2 = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }),
+    withCredentials: true
+  };
 
   getAllTasks(){
     const url = `http://localhost:8082/api/secured/tasks`
@@ -24,7 +30,7 @@ export class TodoService {
     return this.http.get<TodoModel>(url,this.httpOptions)
   }
   deleteTask(taskId:string){
-    const url = `http://localhost:8082/api/secured/task/`+taskId
+    const url = `http://localhost:8082/api/secured/`+taskId
     return this.http.delete(url,this.httpOptions)
   }
 
@@ -33,12 +39,8 @@ export class TodoService {
     return this.http.post(url,this.httpOptions)
   }
   updateTask(taskId:string, title:string, description:string,completed:boolean){
-    const url = `http://localhost:8082/api/secured/update/`+taskId+`?
-    title=`+title+`&
-    description=`+description+`&
-    completed=`+completed+`
-    Content-Type: application/x-www-form-urlencoded`
-    return this.http.put(url,this.httpOptions)
+    const url = `http://localhost:8082/api/secured/update/`+taskId+`?title=`+title+`&description=`+description+`&completed=`+completed
+    return this.http.put(url,{},this.httpOptions2)
   }
   createTask(todo: TodoModel){
     const url = `http://localhost:8082/api/secured/saveNewTask`

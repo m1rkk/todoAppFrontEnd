@@ -1,11 +1,22 @@
 <div class="todo" id="{{todo().id}}">
-  <div id="todo-upper">
-    <h1 id="todo-title">{{todo().title}}</h1>
-    <div id="todo-buttons">
-      <button class="todo-btn" id="edit-btn"><img src="assets/imgs/mingcute_pencil-fill.png"></button>
-      <button class="todo-btn" id="delete-btn"><img src="/assets/imgs/gravity-ui_trash-bin.png"></button>
+  @if (!editState()){
+    <div id="todo-upper">
+      <h1 id="todo-title">{{todo().title}}</h1>
+      <div id="todo-buttons">
+        <button class="todo-btn" id="edit-btn" (click)="enterEditState()"><img src="assets/imgs/mingcute_pencil-fill.png"></button>
+        <button class="todo-btn" id="delete-btn" (click)="deleteTask(todo().id)"><img src="/assets/imgs/gravity-ui_trash-bin.png"></button>
+      </div>
     </div>
-  </div>
-  <p id="todo-description">{{todo().description}}</p>
-  <p id="todo-createdAt">Created At:{{todo().createdAt}}</p>
+    <p id="todo-description">{{todo().description}}</p>
+  } @else {
+    <div id="todo-upper-input">
+      <input type="text" id="todo-title-input" value="{{todo().title}}" [(ngModel)]="taskUpdatedTitle">
+      <div id="todo-buttons-input">
+        <button class="todo-btn" id="save-btn" (click)="saveUpdatedTask(todo().id)"><img src="/assets/imgs/tick.png"></button>
+        <button class="todo-btn" id="cancel-btn" (click)="exitEditState()"><img src="assets/imgs/cross.png"></button>
+      </div>
+    </div>
+    <textarea id="todo-description-input" [value]=todo().description [(ngModel)]="taskUpdatedDescription"></textarea>
+  }
+  <p id="todo-createdAt">Created At:{{todo().createdAt?.substring(0,10)}}</p>
 </div>
