@@ -29,6 +29,7 @@ export class TodoItemEditState {
 
   exitEditState() {
     this.editState.emit(false)
+    location.reload()
   }
 
   updateOrAdd() {
