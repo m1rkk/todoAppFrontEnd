@@ -1,5 +1,5 @@
 export type TodoModel = {
-  id: string,
+  id: string|null,
   userId: string,
   title: string,
   description: string,

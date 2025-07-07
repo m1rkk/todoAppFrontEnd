@@ -20,15 +20,25 @@ export class UserService {
       'Authorization': 'Bearer ' + localStorage.getItem('token')
     })
   };
+
+
   addNewUser(user: UserModel):Observable<UserModel>{
     const url = `http://localhost:8082/api/users/auth/signup`
     return this.http.post<UserModel>(url,user,this.httpOptions)
   }
 
-  getUserByUsername(username:string|null): Observable<Array<TodoModel>>{
+  getUsersTasksByUsername(username:string|null): Observable<Array<TodoModel>>{
     const url = `http://localhost:8082/api/secured/userTasks/username?username=`+username
     return this.http.get<Array<TodoModel>>(url,this.httpOptions2)
   }
+
+  getUserByUsername(username:string|null):Observable<string>{
+    const url = `http://localhost:8082/api/users/auth/userByUsername/` + username
+    return this.http.get(url, {
+      responseType: 'text' as const
+    });
+  }
+
   signIn(username:string,password:string): Observable<string>{
     const url = `http://localhost:8082/api/users/auth/signin`
     const body = {

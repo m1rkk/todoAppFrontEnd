@@ -1,7 +1,10 @@
 <div id="todos-container">
-  @for (todo of userTodos(); track todo.id){
+  <div id="todos" #todos>
+    @for (todo of userTodos(); track todo.id){
       <app-todo-item [todo]="todo"></app-todo-item>
-  } @empty {
-    <p>something went wrong</p>
-  }
+    } @empty {
+      <p>something went wrong</p>
+    }
+  </div>
+  <button id="add-task-btn" (click)="addTask()">Add Task</button>
 </div>

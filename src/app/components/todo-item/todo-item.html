@@ -9,14 +9,7 @@
     </div>
     <p id="todo-description">{{todo().description}}</p>
   } @else {
-    <div id="todo-upper-input">
-      <input type="text" id="todo-title-input" value="{{todo().title}}" [(ngModel)]="taskUpdatedTitle">
-      <div id="todo-buttons-input">
-        <button class="todo-btn" id="save-btn" (click)="saveUpdatedTask(todo().id)"><img src="/assets/imgs/tick.png"></button>
-        <button class="todo-btn" id="cancel-btn" (click)="exitEditState()"><img src="assets/imgs/cross.png"></button>
-      </div>
-    </div>
-    <textarea id="todo-description-input" [value]=todo().description [(ngModel)]="taskUpdatedDescription"></textarea>
+  <app-todo-item-edit-state (editState)="exitEditState($event)" [taskId]="todo().id" ></app-todo-item-edit-state>
   }
   <p id="todo-createdAt">Created At:{{todo().createdAt?.substring(0,10)}}</p>
 </div>

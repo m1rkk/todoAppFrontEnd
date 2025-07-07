@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, InputSignal} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TodoModel} from '../models/todoModel';
 import {Observable} from 'rxjs';
@@ -29,22 +29,26 @@ export class TodoService {
     const url = `http://localhost:8082/api/secured/task/`+taskId
     return this.http.get<TodoModel>(url,this.httpOptions)
   }
-  deleteTask(taskId:string){
+  deleteTask(taskId:string|null){
     const url = `http://localhost:8082/api/secured/`+taskId
     return this.http.delete(url,this.httpOptions)
   }
 
   addTaskToUser(taskId:string){
-    const url = `http://localhost:8082/api/secured/add/`+taskId
-    return this.http.post(url,this.httpOptions)
+    const url = `http://localhost:8082/api/secured/addTask/`+taskId
+    return this.http.post(url,{},this.httpOptions)
   }
-  updateTask(taskId:string, title:string, description:string,completed:boolean){
+
+  updateTask(taskId: string | null | undefined, title: string, description: string, completed: boolean){
     const url = `http://localhost:8082/api/secured/update/`+taskId+`?title=`+title+`&description=`+description+`&completed=`+completed
     return this.http.put(url,{},this.httpOptions2)
   }
-  createTask(todo: TodoModel){
+  createTask(todo: TodoModel):Observable<string>{
     const url = `http://localhost:8082/api/secured/saveNewTask`
-    return this.http.post(url,todo,this.httpOptions)
+    return this.http.post(url, todo, {
+      headers: this.httpOptions.headers,
+      responseType: 'text' as const
+    });
   }
 
 

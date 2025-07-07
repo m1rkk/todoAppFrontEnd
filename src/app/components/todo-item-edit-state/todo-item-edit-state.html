@@ -1,0 +1,10 @@
+<div id="todo-upper-input">
+  <input type="text" id="todo-title-input"  [(ngModel)]="taskTitle">
+  <div id="todo-buttons-input">
+    <button class="todo-btn" id="save-btn" (click)="updateOrAdd()"><img src="/assets/imgs/tick.png"></button>
+    <button class="todo-btn" id="cancel-btn" (click)="exitEditState()"><img src="assets/imgs/cross.png"></button>
+  </div>
+</div>
+<textarea id="todo-description-input"  [(ngModel)]="taskDescription"></textarea>
+
+
