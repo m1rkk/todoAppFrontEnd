@@ -18,7 +18,7 @@ The main purpose of this project is to explore and apply **core Angular concepts
 
 - **Frontend Framework**: Angular
 - **Styling**: SCSS
-- **Backend (external)**: Java Spring Boot with Spring Security & JWT
+- **Backend (external)**: Java Spring Boot with Spring Security & JWT (github repo: https://github.com/m1rkk/todoAppBackend)
 - **DB**: MongoDB 
 
 ## 📡 API Integration
